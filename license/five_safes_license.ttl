@@ -1,0 +1,59 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dpv: <https://w3id.org/dpv> .
+@prefix tre: <https://w3id.org/tre/vocabulary/v0#> .
+
+<https://github.com/odissei-data/ODISSEI-Five-Safes-license/v0/>  # NOTE: this will change to DOI 10.5281/zenodo.18456774
+    a odrl:Offer ;
+    # TODO: verwijs naar Zenodo als alternatief human-readable.
+    odrl:profile <https://w3id.org/tre/vocabulary/v0#> ;
+    odrl:permission [
+        # TODO: add separate odrl:action to access (staat wellicht in AOC profile?)
+        odrl:action [
+            rdf:value         tre:analyse ;
+            # odrl:assigner     tre:Controller ;
+            # odrl:assignee     tre:Researcher ;
+            odrl:refinement [
+                odrl:leftOperand  odrl:virtualLocation ;
+                odrl:operator     odrl:eq ;
+                odrl:rightOperand <https://surfresearchcloud.nl/env/sane/> ;
+            ] .
+        ] ;
+        odrl:constraint [
+            odrl:leftOperand  odrl:purpose ;
+            odrl:operator     odrl:eq ;
+            odrl:rightOperand dpv:NonCommercialResearch ;
+            # Allow research at e.g. governmental organisations; 
+            # So it is not restricted to dpv:AcademicResearch
+        ] ;
+        # TODO: person must be employed by institute, not a student.
+        odrl:constraint [
+            odrl:leftOperand  odrl:elapsedTime ;
+            odrl:operator     odrl:lteq ;
+            odrl:rightOperand "P6M"^^xsd:duration
+            # "P6M" is the ISO 8601 description for "6 month period"
+            # The actual requirement is "no longer than necessary".
+            # For practical reasons, it is here defined as
+            # "at most 6 months since the policy became active"
+        ] ;
+        # odrl:duty [
+        #     odrl:action ex:notifyChange ;
+        # ] ;
+        # odrl:duty [
+        #     odrl:action [
+        #         rdf:value         tre:submitOutputForReview ;
+        #         odrl:assignee     tre:Researcher ;
+        #     ] .
+        # ] ;
+        # odrl:duty [
+        #     odrl:action [
+        #         rdf:value         tre:reviewSubmittedOutput ;
+        #         odrl:assignee     tre:Controller ;
+        #     ] .
+        # ] .
+    ] ;
+    odrl:prohibition [
+        odrl:action odrl:distribute
+    ] .
+
