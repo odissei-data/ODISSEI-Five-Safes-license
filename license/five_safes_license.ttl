@@ -1,15 +1,26 @@
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dpv: <https://w3id.org/dpv> .
+@prefix schema: <http://schema.org/> .
 @prefix tre: <https://w3id.org/tre/vocabulary/v0#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://github.com/odissei-data/ODISSEI-Five-Safes-license/v0/>  # NOTE: this will change to DOI 10.5281/zenodo.18456774
+<https://doi.org/10.5281/zenodo.18456775>
     a odrl:Offer ;
-    # TODO: verwijs naar Zenodo als alternatief human-readable.
+    schema:version "1.0.1" ;
+    dct:isVersionOf <https://doi.org/10.5281/zenodo.18456774> ;
+    # rdfs:seeAlso <https://zenodo.org/records/18456775> ;
+    rdfs:seeAlso <https://github.com/odissei-data/ODISSEI-Five-Safes-license/> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/odissei-data/ODISSEI-Five-Safes-license/refs/heads/main/license/five_safes_license.ttl> ;
     odrl:profile <https://w3id.org/tre/vocabulary/v0#> ;
     odrl:permission [
         # TODO: add separate odrl:action to access (staat wellicht in AOC profile?)
+        # odrl:action [
+        #     rdf:value         tre:analyse ;
+        # ] ;
         odrl:action [
             rdf:value         tre:analyse ;
             # odrl:assigner     tre:Controller ;
@@ -18,7 +29,7 @@
                 odrl:leftOperand  odrl:virtualLocation ;
                 odrl:operator     odrl:eq ;
                 odrl:rightOperand <https://surfresearchcloud.nl/env/sane/> ;
-            ] .
+            ]
         ] ;
         odrl:constraint [
             odrl:leftOperand  odrl:purpose ;
@@ -53,6 +64,9 @@
         #     ] .
         # ] .
     ] ;
+    # odrl:prohibition [
+    #     odrl:action <download>
+    # ] ;
     odrl:prohibition [
         odrl:action odrl:distribute
     ] .
